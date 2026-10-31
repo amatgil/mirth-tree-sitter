@@ -22,7 +22,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "definicio"
+            "name": "def"
           }
         }
       ]
@@ -52,7 +52,7 @@
         ]
       }
     },
-    "definicio": {
+    "def": {
       "type": "CHOICE",
       "members": [
         {
@@ -291,12 +291,39 @@
       ]
     },
     "number": {
-      "type": "PATTERN",
-      "value": "\\d+u?"
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "PATTERN",
+        "value": "\\d+u?"
+      }
+    },
+    "string_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "\""
+          }
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^\\n]*"
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "\""
+          }
+        }
+      ]
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "([a-z]|[A-Z]|[0-9]|!|\"|\\$|%|&|´|\\*|\\+|-|\\/|:|;|<|=|>|\\?|@|\\^|_|\\||~)+"
+      "value": "([a-z]|[A-Z]|[0-9]|!|\\$|%|&|´|\\*|\\+|-|\\/|:|;|<|=|>|\\?|@|\\^|_|\\||~)+"
     },
     "ascii_alphanum": {
       "type": "PATTERN",
