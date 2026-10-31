@@ -131,10 +131,10 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "identifier",
+          "type": "argument",
           "named": true
         }
       ]
@@ -196,6 +196,10 @@
   {
     "type": "]",
     "named": false
+  },
+  {
+    "type": "argument",
+    "named": true
   },
   {
     "type": "ascii_alphanum",

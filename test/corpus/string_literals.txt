@@ -1,0 +1,11 @@
+====
+String literals
+====
+
+def ireturnastring [ ] {
+    "haiii :3"
+}
+
+---
+
+

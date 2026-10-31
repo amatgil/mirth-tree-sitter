@@ -1,0 +1,85 @@
+====
+Basic functions
+====
+
+def foo { 7 }
+def bar { 7 2 + }
+def hasnoarguments1 [ ] { }
+def hasnoarguments2 [] { }
+def hasarguments1 [a -- ] { }
+def hasarguments2 [a -- b] { }
+def hasarguments3 [  -- b] { }
+def hasarguments4 [a |-   -- b] { }
+def hasarguments5 [a |- c -- b] { }
+def hasarguments6 [a |- c --  ] { }
+
+---
+
+(source_file
+  (def
+    (function_definition
+      (identifier)
+      (block
+        (expression
+          (number)))))
+  (def
+    (function_definition
+      (identifier)
+      (block
+        (expression
+          (number))
+        (expression
+          (number))
+        (expression
+          (identifier)))))
+  (def
+    (function_definition
+      (identifier)
+      (parameter_list)
+      (block)))
+  (def
+    (function_definition
+      (identifier)
+      (parameter_list)
+      (block)))
+  (def
+    (function_definition
+      (identifier)
+      (parameter_list
+        (argument))
+      (block)))
+  (def
+    (function_definition
+      (identifier)
+      (parameter_list
+        (argument)
+        (argument))
+      (block)))
+  (def
+    (function_definition
+      (identifier)
+      (parameter_list
+        (argument))
+      (block)))
+  (def
+    (function_definition
+      (identifier)
+      (parameter_list
+        (argument)
+        (argument))
+      (block)))
+  (def
+    (function_definition
+      (identifier)
+      (parameter_list
+        (argument)
+        (argument)
+        (argument))
+      (block)))
+  (def
+    (function_definition
+      (identifier)
+      (parameter_list
+        (argument)
+        (argument))
+      (block))))

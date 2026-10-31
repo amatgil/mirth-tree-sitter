@@ -54,9 +54,9 @@ export default grammar({
 
     parameter_list: $ => seq(
       '[',
-      repeat1($.identifier),
-      optional(seq("|-", repeat1($.identifier))),
-      optional(seq("--", repeat1($.identifier))),
+      repeat(alias($.identifier, $.argument)),
+      optional(seq('|-', repeat(alias($.identifier, $.argument)))),
+      optional(seq('--', repeat(alias($.identifier, $.argument)))),
       ']',
     ),
 
