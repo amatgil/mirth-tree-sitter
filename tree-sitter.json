@@ -16,17 +16,16 @@
   "metadata": {
     "version": "0.1.0",
     "license": "MIT",
-    "description": "Mirth is a strongly-typed concatenative programming language",
+    "description": "Mirth grammar for tree-sitter",
     "authors": [
       {
         "name": "amatgil",
         "email": "amatgilvinyes@gmail.com",
-        "url": "amatgil.cat"
+        "url": "https://amatgil.cat"
       }
     ],
     "links": {
-      "repository": "https://codeberg.org/typeswitch/mirth",
-      "funding": "https://www.patreon.com/typeswitch"
+      "repository": "https://github.com/amatgil/mirth-tree-sitter"
     }
   },
   "bindings": {
