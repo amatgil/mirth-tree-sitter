@@ -9,6 +9,9 @@
       "file-types": [
         "mth"
       ],
+      "highlights": [
+        "queries/highlights.scm"
+      ],
       "injection-regex": "^mirth$",
       "class-name": "TreeSitterMirth"
     }

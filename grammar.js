@@ -25,7 +25,7 @@ export default grammar({
     ),
     comment: $ => token(seq(
       choice("#","|||"),
-      /[^\n\r]*/
+      token.immediate(/.*/)  // stolen from rust's
     )),
 
     // list yoinked from src/def.mth
@@ -42,7 +42,7 @@ export default grammar({
     function_definition: $ => seq(
       optional('inline'),
       'def',
-      $.identifier,
+      field("function_name", $.identifier),
       optional(seq(
         '(',
         $.identifier, repeat(seq(',', $.identifier)),
@@ -64,12 +64,13 @@ export default grammar({
 
     expression: $ => choice(
       $.identifier,
-      $.number
+      $.number,
+      $.stringliteral
     ),
 
     number: $ =>  prec(1, /\d+u?/), // higher prec'endence than identifier !!
 
-    string_literal: $ => seq(
+    stringliteral: $ => seq(
       token.immediate('"'), // 'anything except newline'
       /[^\n]*/,
       token.immediate('"'),

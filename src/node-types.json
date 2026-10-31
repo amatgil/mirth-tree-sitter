@@ -48,6 +48,10 @@
         {
           "type": "number",
           "named": true
+        },
+        {
+          "type": "stringliteral",
+          "named": true
         }
       ]
     }
@@ -55,7 +59,18 @@
   {
     "type": "function_definition",
     "named": true,
-    "fields": {},
+    "fields": {
+      "function_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -144,6 +159,15 @@
         }
       ]
     }
+  },
+  {
+    "type": "stringliteral",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "\"",
+    "named": false
   },
   {
     "type": "(",

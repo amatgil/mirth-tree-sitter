@@ -1,4 +1,13 @@
 
+# this is a comment
+
+def banana { "do a barrel roll!" }
+
+||| this is another one
+
 def main  {
 	1 2 + 4 *
 }
+
+def def { 1 2 + }
+def def2 { def 3 * }
