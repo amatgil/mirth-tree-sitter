@@ -7,11 +7,13 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+const IDENTIFIERCHAR = /[^()\[\]\{\}.,':\s"]/;
+
 export default grammar({
   name: "mirth",
 
-  word: $ => $.identifier, // took me a while to understand: TS will find all literals in this grammar
-                           // matching this, and treat them as keywords instead of bare identifiers
+  word: $ => $.verb, // took me a while to understand: TS will find all literals in this grammar
+                     // matching this, and treat them as keywords instead of bare identifiers
 
   extras: ($) => [
     /\s/, // whitespace
@@ -29,6 +31,19 @@ export default grammar({
     )),
 
     // list yoinked from src/def.mth
+    //     Alias
+    //     Module
+    //     Package
+    //     Data
+    //     Table
+    //     Type
+    //     Tag
+    //     Prim
+    //     Word
+    //     Buffer
+    //     External
+    //     Field
+    //     Macro
     def: $ => choice(
       $.import_statement,
       $.function_definition
@@ -54,11 +69,12 @@ export default grammar({
 
     parameter_list: $ => seq(
       '[',
-      repeat(alias($.identifier, $.argument)),
-      optional(seq('|-', repeat(alias($.identifier, $.argument)))),
-      optional(seq('--', repeat(alias($.identifier, $.argument)))),
+      repeat($.argument),
+      optional(seq('|-', repeat($.argument))),
+      optional(seq('--', repeat($.argument))),
       ']',
     ),
+    argument: $ => $.identifier,  // this 'argument' thing does not take into account named stacks
 
     block: $ => seq( '{', repeat($._expression), '}' ),
 
@@ -77,11 +93,16 @@ export default grammar({
     stringchar: $ => token.immediate(/[^\n"\\]/), // so it's named and can be highlighted separately from escapes
     escape_sequence: $ => token.immediate(seq('\\', choice('\n','n','r','t','\\','"'))),
 
-    // "i.e. the ascii letters, digits, and symbols" excluding ,()[]{}\`."
-    // ^ from the vim extension
-    // (this is so ass but I don't actually know how to write regex-es)
-    // (i'd call it 'word' but i think that's taken in tree-sitter)
-    //identifier: $ => /([a-z]|[A-Z]|[0-9]|!|\$|%|&|´|\*|\+|-|\/|:|;|<|=|>|\?|@|\^|_|\||~)+/,
-    identifier: $ => /[^()\[\]\{\},':\s"]+/,
+    identifier: $ => choice(
+      $.noun,
+      $.verb,
+      $.stackop
+    ),
+    noun: $ => token(prec(2, new RegExp(/([A-Z]|\+[A-Z])/.source + '('+IDENTIFIERCHAR.source+')*'))),
+    verb: $ => token(prec(1, new RegExp('('+IDENTIFIERCHAR.source+')+'))),
+    stackop: $ => choice(
+      new RegExp('>' + '('+IDENTIFIERCHAR.source+')+'),
+      new RegExp('('+IDENTIFIERCHAR.source+')+' + '>'),
+    )
   }
 });

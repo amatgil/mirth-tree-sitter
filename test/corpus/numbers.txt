@@ -31,7 +31,8 @@ def whole [] {
   (comment)
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list)
       (block
         (number)

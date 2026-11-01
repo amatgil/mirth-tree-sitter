@@ -18,68 +18,124 @@ def hasarguments6 [a |- c --  ] { }
 (source_file
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (block
-        (expression
-          (number)))))
+        (number))))
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (block
-        (expression
-          (number))
-        (expression
-          (number))
-        (expression
-          (identifier)))))
+        (number)
+        (number)
+        (identifier
+          (verb)))))
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list)
       (block)))
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list)
       (block)))
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list
-        (argument))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb))))
       (block)))
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list
-        (argument)
-        (argument))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb))))
       (block)))
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list
-        (argument))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb))))
       (block)))
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list
-        (argument)
-        (argument))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb))))
       (block)))
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list
-        (argument)
-        (argument)
-        (argument))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb))))
       (block)))
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list
-        (argument)
-        (argument))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb))))
       (block))))

@@ -47,6 +47,15 @@
 
 
 "def" @keyword
+"module" @keyword
+"import" @keyword
+"{" @punctuation
+"}" @punctuation
+"[" @punctuation
+"}" @punctuation
+"(" @punctuation.special
+")" @punctuation.special
+(argument) @parameter
 (identifier) @function
 (stringliteral) @string
 (number) @number

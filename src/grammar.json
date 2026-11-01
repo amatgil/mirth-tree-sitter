@@ -1,7 +1,7 @@
 {
   "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "mirth",
-  "word": "identifier",
+  "word": "verb",
   "rules": {
     "source_file": {
       "type": "SEQ",
@@ -206,13 +206,8 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "identifier"
-            },
-            "named": true,
-            "value": "argument"
+            "type": "SYMBOL",
+            "name": "argument"
           }
         },
         {
@@ -228,13 +223,8 @@
                 {
                   "type": "REPEAT",
                   "content": {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "identifier"
-                    },
-                    "named": true,
-                    "value": "argument"
+                    "type": "SYMBOL",
+                    "name": "argument"
                   }
                 }
               ]
@@ -257,13 +247,8 @@
                 {
                   "type": "REPEAT",
                   "content": {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "identifier"
-                    },
-                    "named": true,
-                    "value": "argument"
+                    "type": "SYMBOL",
+                    "name": "argument"
                   }
                 }
               ]
@@ -278,6 +263,10 @@
           "value": "]"
         }
       ]
+    },
+    "argument": {
+      "type": "SYMBOL",
+      "name": "identifier"
     },
     "block": {
       "type": "SEQ",
@@ -417,8 +406,56 @@
       }
     },
     "identifier": {
-      "type": "PATTERN",
-      "value": "[^()\\[\\]\\{\\},':\\s\"]+"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "noun"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "verb"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "stackop"
+        }
+      ]
+    },
+    "noun": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "PATTERN",
+          "value": "([A-Z]|\\+[A-Z])([^()\\[\\]\\{\\}.,':\\s\"])*"
+        }
+      }
+    },
+    "verb": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "([^()\\[\\]\\{\\}.,':\\s\"])+"
+        }
+      }
+    },
+    "stackop": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": ">([^()\\[\\]\\{\\}.,':\\s\"])+"
+        },
+        {
+          "type": "PATTERN",
+          "value": "([^()\\[\\]\\{\\}.,':\\s\"])+>"
+        }
+      ]
     }
   },
   "extras": [

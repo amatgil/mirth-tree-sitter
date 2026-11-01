@@ -13,7 +13,8 @@ write out!"
 (source_file
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list)
       (block
         (stringliteral

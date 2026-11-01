@@ -17,7 +17,8 @@ def allthescapes [ ] {
 (source_file
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list)
       (block
         (stringliteral
@@ -32,7 +33,8 @@ def allthescapes [ ] {
             (stringchar))))))
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list)
       (block
         (stringliteral
@@ -62,7 +64,8 @@ def allthescapes [ ] {
             (stringchar))))))
   (def
     (function_definition
-      (identifier)
+      (identifier
+        (verb))
       (parameter_list)
       (block
         (stringliteral
