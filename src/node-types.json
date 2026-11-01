@@ -31,11 +31,21 @@
           "named": true
         },
         {
+          "type": "puntuacio",
+          "named": true
+        },
+        {
           "type": "stringliteral",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "comment",
+    "named": true,
+    "extra": true,
+    "fields": {}
   },
   {
     "type": "def",
@@ -250,11 +260,6 @@
     "named": false
   },
   {
-    "type": "comment",
-    "named": true,
-    "extra": true
-  },
-  {
     "type": "def",
     "named": false
   },
@@ -280,6 +285,10 @@
   },
   {
     "type": "number",
+    "named": true
+  },
+  {
+    "type": "puntuacio",
     "named": true
   },
   {

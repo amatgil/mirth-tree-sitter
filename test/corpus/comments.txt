@@ -1,0 +1,36 @@
+===
+Comments
+===
+
+def banana {
+    # omg comment A
+    1 2 +
+}
+
+def bananana {
+    ||| omg comment B
+    1 2 +
+}
+---
+
+(source_file
+  (def
+    (function_definition
+      (identifier
+        (verb))
+      (block
+        (comment)
+        (number)
+        (number)
+        (identifier
+          (verb)))))
+  (def
+    (function_definition
+      (identifier
+        (verb))
+      (block
+        (comment)
+        (number)
+        (number)
+        (identifier
+          (verb))))))

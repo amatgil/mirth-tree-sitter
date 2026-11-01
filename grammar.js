@@ -25,10 +25,7 @@ export default grammar({
       optional($.module_declaration), // not really optional but for parsing, yeah
       repeat($.def)
     ),
-    comment: $ => token(seq(
-      choice("#","|||"),
-      token.immediate(/.*/)  // stolen from rust's
-    )),
+    comment: $ => choice(/#.*/, /\|\|\|.*/),
 
     // list yoinked from src/def.mth
     //     Alias
@@ -81,7 +78,8 @@ export default grammar({
     _expression: $ => choice(
       $.number,
       $.identifier,
-      $.stringliteral
+      $.stringliteral,
+      $.puntuacio
     ),
 
     // higher LEXICAL precendence than identifier !!
@@ -103,6 +101,7 @@ export default grammar({
       token(prec(2,new RegExp('>' + '('+IDENTIFIERCHAR.source+')+'))),
       token(prec(2,new RegExp('('+IDENTIFIERCHAR.source+')+' + '>'))),
     ),
-    verb: $ => token(prec(1, new RegExp('('+IDENTIFIERCHAR.source+')+')))
+    verb: $ => token(prec(1, new RegExp('('+IDENTIFIERCHAR.source+')+'))),
+    puntuacio: $ => /(:|,)/
   }
 });
