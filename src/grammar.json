@@ -212,8 +212,15 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "--"
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 10,
+            "content": {
+              "type": "STRING",
+              "value": "--"
+            }
+          }
         },
         {
           "type": "REPEAT",
@@ -236,12 +243,25 @@
           "name": "identifier"
         },
         {
-          "type": "STRING",
-          "value": ":"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -328,8 +348,34 @@
       ]
     },
     "argument": {
-      "type": "SYMBOL",
-      "name": "identifier"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
     },
     "block": {
       "type": "SEQ",
@@ -369,6 +415,10 @@
         {
           "type": "SYMBOL",
           "name": "puntuacio"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "block"
         }
       ]
     },
@@ -496,7 +546,7 @@
         "value": 3,
         "content": {
           "type": "PATTERN",
-          "value": "([A-Z]|\\+[A-Z])([^()\\[\\]\\{\\}.,':\\s\"])*.?"
+          "value": "([A-Z]|\\+[A-Z])([^()\\[\\]\\{\\}.,':\\s\"])*"
         }
       }
     },
@@ -540,7 +590,7 @@
     },
     "puntuacio": {
       "type": "PATTERN",
-      "value": "(:|,)"
+      "value": "(:|,|.|->)"
     }
   },
   "extras": [

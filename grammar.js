@@ -70,11 +70,11 @@ export default grammar({
       field("struct_name", $.identifier),
       '{',
       repeat($.struct_attributes),
-      '--',
+      token(prec(10,'--')),
       repeat($.function_definition),
       '}',
     ),
-    struct_attributes: $ => seq($.identifier, ":", $.identifier),
+    struct_attributes: $ => seq($.identifier, optional(seq(":", $.identifier))),
 
     parameter_list: $ => seq(
       '[',
@@ -83,7 +83,12 @@ export default grammar({
       optional(seq(token(prec(2,'--')), repeat($.argument))),
       ']',
     ),
-    argument: $ => $.identifier,  // this 'argument' thing does not take into account named stacks
+    argument: $ => seq(
+      $.identifier,
+      optional(seq(
+        ":",
+        $.identifier
+    ))),
 
     block: $ => seq( '{', repeat($._expression), '}' ),
 
@@ -91,7 +96,8 @@ export default grammar({
       $.number,
       $.identifier,
       $.stringliteral,
-      $.puntuacio
+      $.puntuacio,
+      $.block // match blocks and such
     ),
 
     // higher LEXICAL precendence than identifier !!
@@ -104,20 +110,18 @@ export default grammar({
     escape_sequence: $ => token.immediate(seq('\\', choice('\n','n','r','t','\\','"'))),
 
     identifier: $ => choice(
-      $.method_noun, // this is such a bodge
       $.noun,
       $.stackop,
       $.verb
     ),
     // unicode letter casing is scary: ascii only
     // also this regex-as-strings manip is absolutely ass
-    method_noun: $ => token(prec(4, new RegExp(/([A-Z]|\+[A-Z])/.source + '('+IDENTIFIERCHAR.source+')*' + '\.' + '('+IDENTIFIERCHAR.source+')*'))),
     noun: $ => token(prec(3, new RegExp(/([A-Z]|\+[A-Z])/.source + '('+IDENTIFIERCHAR.source+')*'))),
     stackop: $ => choice(
       token(prec(2,new RegExp('>' + '('+IDENTIFIERCHAR.source+')+'))),
       token(prec(2,new RegExp('('+IDENTIFIERCHAR.source+')+' + '>'))),
     ),
     verb: $ => token(prec(1, new RegExp('('+IDENTIFIERCHAR.source+')+'))),
-    puntuacio: $ => /(:|,)/
+    puntuacio: $ => /(:|,|.|->)/
   }
 });
