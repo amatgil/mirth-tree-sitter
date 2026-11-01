@@ -106,11 +106,6 @@
     }
   },
   {
-    "type": "number",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "parameter_list",
     "named": true,
     "fields": {},
@@ -210,6 +205,10 @@
   {
     "type": "module",
     "named": false
+  },
+  {
+    "type": "number",
+    "named": true
   },
   {
     "type": "{",

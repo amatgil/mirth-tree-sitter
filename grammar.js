@@ -63,20 +63,13 @@ export default grammar({
     block: $ => seq( '{', repeat($._expression), '}' ),
 
     _expression: $ => choice(
+      $.number,
       $.identifier,
-      $.number, // higher prec'endence than identifier !!
       $.stringliteral
     ),
 
-    number: $ => prec(2,seq(
-      optional(token.immediate(/(\+|-)/)),
-      optional($._numeric_prefix),
-      token.immediate(/\d+/),
-      optional($._numeric_suffix)
-    )),
-
-    _numeric_prefix: $ => token.immediate(/(0x|0o)/),
-    _numeric_suffix: $ => token.immediate(/(u|u8|u16|u32|u64|i8|i16|i32|i64)/),
+    // higher LEXICAL prec'endence than identifier !!
+    number: $ => token(prec(2, /[+-]?(0x|0o)?\d+(u|u8|u16|u32|u64|i8|i16|i32|i64)?/)),
 
     stringliteral: $ => seq(
       token.immediate('"'), // 'anything except newline'
