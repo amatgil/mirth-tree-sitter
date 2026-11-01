@@ -104,12 +104,15 @@ export default grammar({
     escape_sequence: $ => token.immediate(seq('\\', choice('\n','n','r','t','\\','"'))),
 
     identifier: $ => choice(
+      $.method_noun, // this is such a bodge
       $.noun,
       $.stackop,
       $.verb
     ),
     // unicode letter casing is scary: ascii only
-    noun: $ => token(prec(3, new RegExp(/([A-Z]|\+[A-Z])/.source + '('+IDENTIFIERCHAR.source+')*' + '\.?'))),
+    // also this regex-as-strings manip is absolutely ass
+    method_noun: $ => token(prec(4, new RegExp(/([A-Z]|\+[A-Z])/.source + '('+IDENTIFIERCHAR.source+')*' + '\.' + '('+IDENTIFIERCHAR.source+')*'))),
+    noun: $ => token(prec(3, new RegExp(/([A-Z]|\+[A-Z])/.source + '('+IDENTIFIERCHAR.source+')*'))),
     stackop: $ => choice(
       token(prec(2,new RegExp('>' + '('+IDENTIFIERCHAR.source+')+'))),
       token(prec(2,new RegExp('('+IDENTIFIERCHAR.source+')+' + '>'))),
