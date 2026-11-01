@@ -12,6 +12,9 @@ def hasarguments3 [  -- b] { }
 def hasarguments4 [a |-   -- b] { }
 def hasarguments5 [a |- c -- b] { }
 def hasarguments6 [a |- c --  ] { }
+def hasarguments7 [a |-       ] { }
+def hasarguments7 [a |-     b ] { }
+def hasarguments7 [a b |-     ] { }
 
 ---
 
@@ -50,6 +53,36 @@ def hasarguments6 [a |- c --  ] { }
       (parameter_list
         (argument
           (identifier
+            (verb))))
+      (block)))
+  (def
+    (function_definition
+      (identifier
+        (verb))
+      (parameter_list
+        (argument
+          (identifier
+            (verb)))
+        (argument
+          (identifier
+            (verb))))
+      (block)))
+  (def
+    (function_definition
+      (identifier
+        (verb))
+      (parameter_list
+        (argument
+          (identifier
+            (verb))))
+      (block)))
+  (def
+    (function_definition
+      (identifier
+        (verb))
+      (parameter_list
+        (argument
+          (identifier
             (verb)))
         (argument
           (identifier
@@ -89,15 +122,6 @@ def hasarguments6 [a |- c --  ] { }
       (parameter_list
         (argument
           (identifier
-            (verb)))
-        (argument
-          (identifier
-            (verb)))
-        (argument
-          (identifier
-            (verb)))
-        (argument
-          (identifier
             (verb))))
       (block)))
   (def
@@ -110,15 +134,6 @@ def hasarguments6 [a |- c --  ] { }
             (verb)))
         (argument
           (identifier
-            (verb)))
-        (argument
-          (identifier
-            (verb)))
-        (argument
-          (identifier
-            (verb)))
-        (argument
-          (identifier
             (verb))))
       (block)))
   (def
@@ -126,12 +141,6 @@ def hasarguments6 [a |- c --  ] { }
       (identifier
         (verb))
       (parameter_list
-        (argument
-          (identifier
-            (verb)))
-        (argument
-          (identifier
-            (verb)))
         (argument
           (identifier
             (verb)))

@@ -43,7 +43,8 @@ export default grammar({
     //     Macro
     def: $ => choice(
       $.import_statement,
-      $.function_definition
+      $.function_definition,
+      $.struct_definition
     ),
 
 
@@ -64,11 +65,22 @@ export default grammar({
       $.block // 'body' maybe?
     ),
 
+    struct_definition: $ => seq(
+      'struct',
+      field("struct_name", $.identifier),
+      '{',
+      repeat($.struct_attributes),
+      '--',
+      repeat($.function_definition),
+      '}',
+    ),
+    struct_attributes: $ => seq($.identifier, ":", $.identifier),
+
     parameter_list: $ => seq(
       '[',
       repeat($.argument),
-      optional(seq('|-', repeat($.argument))),
-      optional(seq('--', repeat($.argument))),
+      optional(seq(token(prec(2,'|-')), repeat($.argument))),
+      optional(seq(token(prec(2,'--')), repeat($.argument))),
       ']',
     ),
     argument: $ => $.identifier,  // this 'argument' thing does not take into account named stacks
@@ -96,7 +108,8 @@ export default grammar({
       $.stackop,
       $.verb
     ),
-    noun: $ => token(prec(3, new RegExp(/([A-Z]|\+[A-Z])/.source + '('+IDENTIFIERCHAR.source+')*'))),
+    // unicode letter casing is scary: ascii only
+    noun: $ => token(prec(3, new RegExp(/([A-Z]|\+[A-Z])/.source + '('+IDENTIFIERCHAR.source+')*' + '\.?'))),
     stackop: $ => choice(
       token(prec(2,new RegExp('>' + '('+IDENTIFIERCHAR.source+')+'))),
       token(prec(2,new RegExp('('+IDENTIFIERCHAR.source+')+' + '>'))),

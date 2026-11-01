@@ -62,6 +62,10 @@
         {
           "type": "import_statement",
           "named": true
+        },
+        {
+          "type": "struct_definition",
+          "named": true
         }
       ]
     }
@@ -228,6 +232,51 @@
     }
   },
   {
+    "type": "struct_attributes",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct_definition",
+    "named": true,
+    "fields": {
+      "struct_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "struct_attributes",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "\"",
     "named": false
   },
@@ -249,6 +298,10 @@
   },
   {
     "type": ".",
+    "named": false
+  },
+  {
+    "type": ":",
     "named": false
   },
   {
@@ -294,6 +347,10 @@
   {
     "type": "stringchar",
     "named": true
+  },
+  {
+    "type": "struct",
+    "named": false
   },
   {
     "type": "verb",

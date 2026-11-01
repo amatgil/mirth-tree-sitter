@@ -1,0 +1,16 @@
+====
+Methods
+====
+
+
+struct Foo {
+    a: b
+    --
+    def banana [] {}
+}
+
+def backflip {
+    Foo.banana
+}
+
+---

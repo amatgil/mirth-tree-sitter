@@ -48,12 +48,16 @@
 
 "def" @keyword
 "module" @keyword
+"struct" @keyword
 "import" @keyword
 (puntuacio) @punctuation
 "{" @punctuation
 "}" @punctuation
 "[" @punctuation
 "]" @punctuation
+"|-" @punctuation
+"--" @punctuation
+":" @punctuation
 "(" @punctuation.bracket
 ")" @punctuation.bracket
 (argument) @parameter
