@@ -5,7 +5,76 @@ String literals
 def ireturnastring [ ] {
     "haiii :3"
 }
+def ireturnastringwithescapes [ ] {
+    "- first\n- second\n-third"
+}
+def allthescapes [ ] {
+    "a\nb\rc\td\\e\"f"
+}
 
 ---
 
-
+(source_file
+  (def
+    (function_definition
+      (identifier)
+      (parameter_list)
+      (block
+        (stringliteral
+          (stringcontent
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar))))))
+  (def
+    (function_definition
+      (identifier)
+      (parameter_list)
+      (block
+        (stringliteral
+          (stringcontent
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (escape_sequence)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (escape_sequence)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar))))))
+  (def
+    (function_definition
+      (identifier)
+      (parameter_list)
+      (block
+        (stringliteral
+          (stringcontent
+            (stringchar)
+            (escape_sequence)
+            (stringchar)
+            (escape_sequence)
+            (stringchar)
+            (escape_sequence)
+            (stringchar)
+            (escape_sequence)
+            (stringchar)
+            (escape_sequence)
+            (stringchar)))))))

@@ -1,0 +1,76 @@
+===
+Multiline strings
+===
+
+def multi [] {
+    "this is a string that\
+takes multiple lines to\
+write out!"
+}
+
+---
+
+(source_file
+  (def
+    (function_definition
+      (identifier)
+      (parameter_list)
+      (block
+        (stringliteral
+          (stringcontent
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (escape_sequence)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (escape_sequence)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)
+            (stringchar)))))))

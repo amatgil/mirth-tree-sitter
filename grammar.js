@@ -68,19 +68,20 @@ export default grammar({
       $.stringliteral
     ),
 
-    // higher LEXICAL prec'endence than identifier !!
+    // higher LEXICAL precendence than identifier !!
     number: $ => token(prec(2, /[+-]?(0x|0o)?\d+(u|u8|u16|u32|u64|i8|i16|i32|i64)?/)),
 
-    stringliteral: $ => seq(
-      token.immediate('"'), // 'anything except newline'
-      /[^\n]*/,
-      token.immediate('"'),
-    ),
+    // TS detects and disallows rules that match the empty string. neat!
+    stringliteral: $ => seq('"', optional($.stringcontent), '"'), // simplified from rust's
+    stringcontent: $ => repeat1(choice($.escape_sequence, $.stringchar)),
+    stringchar: $ => token.immediate(/[^\n"\\]/), // so it's named and can be highlighted separately from escapes
+    escape_sequence: $ => token.immediate(seq('\\', choice('\n','n','r','t','\\','"'))),
+
     // "i.e. the ascii letters, digits, and symbols" excluding ,()[]{}\`."
     // ^ from the vim extension
     // (this is so ass but I don't actually know how to write regex-es)
     // (i'd call it 'word' but i think that's taken in tree-sitter)
     //identifier: $ => /([a-z]|[A-Z]|[0-9]|!|\$|%|&|´|\*|\+|-|\/|:|;|<|=|>|\?|@|\^|_|\||~)+/,
-    identifier: $ => /[^()\[\]\{\},':\s]+/,
+    identifier: $ => /[^()\[\]\{\},':\s"]+/,
   }
 });
