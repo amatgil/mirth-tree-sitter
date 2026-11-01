@@ -414,11 +414,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "verb"
+          "name": "stackop"
         },
         {
           "type": "SYMBOL",
-          "name": "stackop"
+          "name": "verb"
         }
       ]
     },
@@ -426,12 +426,39 @@
       "type": "TOKEN",
       "content": {
         "type": "PREC",
-        "value": 2,
+        "value": 3,
         "content": {
           "type": "PATTERN",
           "value": "([A-Z]|\\+[A-Z])([^()\\[\\]\\{\\}.,':\\s\"])*"
         }
       }
+    },
+    "stackop": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 2,
+            "content": {
+              "type": "PATTERN",
+              "value": ">([^()\\[\\]\\{\\}.,':\\s\"])+"
+            }
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 2,
+            "content": {
+              "type": "PATTERN",
+              "value": "([^()\\[\\]\\{\\}.,':\\s\"])+>"
+            }
+          }
+        }
+      ]
     },
     "verb": {
       "type": "TOKEN",
@@ -443,19 +470,6 @@
           "value": "([^()\\[\\]\\{\\}.,':\\s\"])+"
         }
       }
-    },
-    "stackop": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": ">([^()\\[\\]\\{\\}.,':\\s\"])+"
-        },
-        {
-          "type": "PATTERN",
-          "value": "([^()\\[\\]\\{\\}.,':\\s\"])+>"
-        }
-      ]
     }
   },
   "extras": [

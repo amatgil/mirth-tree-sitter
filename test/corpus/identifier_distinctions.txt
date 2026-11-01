@@ -1,0 +1,44 @@
+====
+Identifier distinctions
+====
+
+def whatever {
+    1 2 +
+    Int int Int int +Int
+    1 >x 2 >y foo >z print
+}
+
+---
+
+(source_file
+  (def
+    (function_definition
+      (identifier
+        (verb))
+      (block
+        (number)
+        (number)
+        (identifier
+          (verb))
+        (identifier
+          (noun))
+        (identifier
+          (verb))
+        (identifier
+          (noun))
+        (identifier
+          (verb))
+        (identifier
+          (noun))
+        (number)
+        (identifier
+          (stackop))
+        (number)
+        (identifier
+          (stackop))
+        (identifier
+          (verb))
+        (identifier
+          (stackop))
+        (identifier
+          (verb))))))

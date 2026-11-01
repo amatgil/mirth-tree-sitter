@@ -95,14 +95,14 @@ export default grammar({
 
     identifier: $ => choice(
       $.noun,
-      $.verb,
-      $.stackop
+      $.stackop,
+      $.verb
     ),
-    noun: $ => token(prec(2, new RegExp(/([A-Z]|\+[A-Z])/.source + '('+IDENTIFIERCHAR.source+')*'))),
-    verb: $ => token(prec(1, new RegExp('('+IDENTIFIERCHAR.source+')+'))),
+    noun: $ => token(prec(3, new RegExp(/([A-Z]|\+[A-Z])/.source + '('+IDENTIFIERCHAR.source+')*'))),
     stackop: $ => choice(
-      new RegExp('>' + '('+IDENTIFIERCHAR.source+')+'),
-      new RegExp('('+IDENTIFIERCHAR.source+')+' + '>'),
-    )
+      token(prec(2,new RegExp('>' + '('+IDENTIFIERCHAR.source+')+'))),
+      token(prec(2,new RegExp('('+IDENTIFIERCHAR.source+')+' + '>'))),
+    ),
+    verb: $ => token(prec(1, new RegExp('('+IDENTIFIERCHAR.source+')+')))
   }
 });
