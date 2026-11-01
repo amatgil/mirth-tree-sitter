@@ -36,8 +36,8 @@ export default grammar({
 
 
 
-    module_declaration: $ => seq('module', $.ascii_alphanum, '.', $.ascii_alphanum),
-    import_statement: $ => seq('import', $.ascii_alphanum, '.', $.ascii_alphanum),
+    module_declaration: $ => seq('module', $.identifier, '.', $.identifier),
+    import_statement: $ => seq('import', $.identifier, '.', $.identifier),
 
     function_definition: $ => seq(
       optional('inline'),
@@ -60,15 +60,23 @@ export default grammar({
       ']',
     ),
 
-    block: $ => seq( '{', repeat($.expression), '}' ),
+    block: $ => seq( '{', repeat($._expression), '}' ),
 
-    expression: $ => choice(
+    _expression: $ => choice(
       $.identifier,
-      $.number,
+      $.number, // higher prec'endence than identifier !!
       $.stringliteral
     ),
 
-    number: $ =>  prec(1, /\d+u?/), // higher prec'endence than identifier !!
+    number: $ => prec(2,seq(
+      optional(token.immediate(/(\+|-)/)),
+      optional($._numeric_prefix),
+      token.immediate(/\d+/),
+      optional($._numeric_suffix)
+    )),
+
+    _numeric_prefix: $ => token.immediate(/(0x|0o)/),
+    _numeric_suffix: $ => token.immediate(/(u|u8|u16|u32|u64|i8|i16|i32|i64)/),
 
     stringliteral: $ => seq(
       token.immediate('"'), // 'anything except newline'
@@ -79,9 +87,7 @@ export default grammar({
     // ^ from the vim extension
     // (this is so ass but I don't actually know how to write regex-es)
     // (i'd call it 'word' but i think that's taken in tree-sitter)
-    identifier: $ => /([a-z]|[A-Z]|[0-9]|!|\$|%|&|´|\*|\+|-|\/|:|;|<|=|>|\?|@|\^|_|\||~)+/,
-
-    // I made this one up tremendously based on other langs' I know (e.g. rust)
-    ascii_alphanum: $ => /([a-z]|[A-Z]|_)([a-z]|[A-Z]|[0-9]|_)*/
+    //identifier: $ => /([a-z]|[A-Z]|[0-9]|!|\$|%|&|´|\*|\+|-|\/|:|;|<|=|>|\?|@|\^|_|\||~)+/,
+    identifier: $ => /[^()\[\]\{\},':\s]+/,
   }
 });
