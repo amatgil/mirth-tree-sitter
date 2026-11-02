@@ -44,7 +44,9 @@ export default grammar({
     def: $ => choice(
       $.import_statement,
       $.function_definition,
-      $.struct_definition
+      $.struct_definition,
+      $.data_definition,
+      $.external_definition
     ),
 
 
@@ -52,6 +54,7 @@ export default grammar({
     module_declaration: $ => seq('module', $.identifier, '.', $.identifier),
     import_statement: $ => seq('import', $.identifier, '.', $.identifier),
 
+    block: $ => seq( '{', repeat($._expression), '}' ),
     function_definition: $ => seq(
       optional('inline'),
       'def',
@@ -64,18 +67,6 @@ export default grammar({
       optional($.parameter_list),
       $.block // 'body' maybe?
     ),
-
-    struct_definition: $ => seq(
-      'struct',
-      field("struct_name", $.identifier),
-      '{',
-      repeat($.struct_attributes),
-      token(prec(10,'--')),
-      repeat($.function_definition),
-      '}',
-    ),
-    struct_attributes: $ => seq($.identifier, optional(seq(":", $.identifier))),
-
     parameter_list: $ => seq(
       '[',
       repeat($.argument),
@@ -90,7 +81,31 @@ export default grammar({
         $.identifier
     ))),
 
-    block: $ => seq( '{', repeat($._expression), '}' ),
+    struct_definition: $ => seq(
+      'struct',
+      field("struct_name", $.identifier),
+      '{',
+      repeat($.struct_attributes),
+      token(prec(10,'--')),
+      repeat($.function_definition),
+      '}',
+    ),
+    struct_attributes: $ => seq(
+      $.identifier,
+      optional(seq(":",
+        $.identifier, optional(seq("(", $.identifier, ")"))))
+    ),
+
+    data_definition: $ => seq(
+      'data',
+      field("data_name", $.identifier),
+      '{',
+      repeat($.identifier),
+      token(prec(10,'--')),
+      repeat($.function_definition),
+      '}',
+    ),
+
 
     _expression: $ => choice(
       $.number,

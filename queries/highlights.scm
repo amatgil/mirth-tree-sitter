@@ -50,6 +50,7 @@
 "module" @keyword
 "struct" @keyword
 "import" @keyword
+"inline" @keyword
 (puntuacio) @punctuation
 "{" @punctuation
 "}" @punctuation
