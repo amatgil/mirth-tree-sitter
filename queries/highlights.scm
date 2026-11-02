@@ -48,6 +48,7 @@
 
 "def" @keyword
 "module" @keyword
+"data" @keyword
 "struct" @keyword
 "import" @keyword
 "inline" @keyword

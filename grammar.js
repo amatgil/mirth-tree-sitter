@@ -103,7 +103,7 @@ export default grammar({
       'data',
       field("data_name", $.identifier),
       '{',
-      repeat($.identifier),
+      repeat(seq(optional($.number), $.identifier)),
       optional(seq(
         token(prec(10,'--')),
         repeat($.function_definition),
