@@ -51,6 +51,7 @@
 "struct" @keyword
 "import" @keyword
 "inline" @keyword
+"external" @keyword
 (puntuacio) @punctuation
 "{" @punctuation
 "}" @punctuation

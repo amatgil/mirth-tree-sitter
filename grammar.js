@@ -46,7 +46,7 @@ export default grammar({
       $.function_definition,
       $.struct_definition,
       $.data_definition,
-      $.external_definition
+      $.external_definition // we also need external-with-loader i think?
     ),
 
 
@@ -105,6 +105,12 @@ export default grammar({
       repeat($.function_definition),
       '}',
     ),
+
+    external_definition: $ => seq('external', choice(
+      seq('(', repeat1(seq($.identifier, $.parameter_list)), ')'),
+      seq('{', repeat1(seq($.identifier, $.parameter_list)), '}'),
+      seq($.identifier, $.parameter_list),
+    )),
 
 
     _expression: $ => choice(
