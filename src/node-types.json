@@ -106,6 +106,10 @@
           "named": true
         },
         {
+          "type": "inline_block",
+          "named": true
+        },
+        {
           "type": "struct_definition",
           "named": true
         }
@@ -198,6 +202,21 @@
       "types": [
         {
           "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "inline_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "function_definition",
           "named": true
         }
       ]

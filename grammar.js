@@ -46,7 +46,8 @@ export default grammar({
       $.function_definition,
       $.struct_definition,
       $.data_definition,
-      $.external_definition // we also need external-with-loader i think?
+      $.external_definition, // we also need external-with-loader i think?
+      $.inline_block // no idea what this actually is, i found one in sdl2
     ),
 
 
@@ -86,8 +87,10 @@ export default grammar({
       field("struct_name", $.identifier),
       '{',
       repeat($.struct_attributes),
-      token(prec(10,'--')),
-      repeat($.function_definition),
+      optional(seq(
+        token(prec(10,'--')),
+        repeat($.function_definition),
+      )),
       '}',
     ),
     struct_attributes: $ => seq(
@@ -101,8 +104,10 @@ export default grammar({
       field("data_name", $.identifier),
       '{',
       repeat($.identifier),
-      token(prec(10,'--')),
-      repeat($.function_definition),
+      optional(seq(
+        token(prec(10,'--')),
+        repeat($.function_definition),
+      )),
       '}',
     ),
 
@@ -111,6 +116,8 @@ export default grammar({
       seq('{', repeat1(seq($.identifier, $.parameter_list)), '}'),
       seq($.identifier, $.parameter_list),
     )),
+
+    inline_block: $ => seq('inline', '{', repeat($.function_definition), '}'),
 
 
     _expression: $ => choice(
@@ -122,7 +129,7 @@ export default grammar({
     ),
 
     // higher LEXICAL precendence than identifier !!
-    number: $ => token(prec(2, /[+-]?(0x|0o)?\d+(u|u8|u16|u32|u64|i8|i16|i32|i64)?/)),
+    number: $ => token(prec(2, /[+-]?(0x[0-9a-fA-F]+|0o[0-8]+|\d+)(u|u8|u16|u32|u64|i8|i16|i32|i64)?/)),
 
     // TS detects and disallows rules that match the empty string. neat!
     stringliteral: $ => seq('"', optional($.stringcontent), '"'), // simplified from rust's

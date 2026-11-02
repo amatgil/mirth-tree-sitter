@@ -60,6 +60,7 @@
 "|-" @punctuation
 "--" @punctuation
 ":" @punctuation
+"," @punctuation
 "(" @punctuation.bracket
 ")" @punctuation.bracket
 (argument) @parameter

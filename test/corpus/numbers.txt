@@ -18,6 +18,7 @@ def whole [] {
     -42i8 -42i16 -42i32 -42i64 0o42u 0o42u8 0o42u16 0o42u32 0o42u64 0o42i8
     0o42i16 0o42i32 0o42i64 0x42u 0x42u8 0x42u16 0x42u32 0x42u64 0x42i8 0x42i16
     0x42i32 0x42i64 42u 42u8 42u16 42u32 42u64 42i8 42i16 42i32
+    0xFF 0xAA 0xFA 0xAF
 }
 
 ---
@@ -35,6 +36,10 @@ def whole [] {
         (verb))
       (parameter_list)
       (block
+        (number)
+        (number)
+        (number)
+        (number)
         (number)
         (number)
         (number)
