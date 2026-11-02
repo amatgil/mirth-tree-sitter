@@ -9,8 +9,49 @@ struct Foo {
     def banana [] {}
 }
 
+# no functions, no double dash
+struct FooSquared {
+    a: b
+}
+
 def backflip {
     Foo.banana
 }
 
 ---
+
+(source_file
+  (def
+    (struct_definition
+      (identifier
+        (noun))
+      (struct_attributes
+        (identifier
+          (verb))
+        (identifier
+          (verb)))
+      (function_definition
+        (identifier
+          (verb))
+        (parameter_list)
+        (block))))
+  (comment)
+  (def
+    (struct_definition
+      (identifier
+        (noun))
+      (struct_attributes
+        (identifier
+          (verb))
+        (identifier
+          (verb)))))
+  (def
+    (function_definition
+      (identifier
+        (verb))
+      (block
+        (identifier
+          (noun))
+        (puntuacio)
+        (identifier
+          (verb))))))
